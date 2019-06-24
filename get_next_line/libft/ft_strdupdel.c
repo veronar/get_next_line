@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtok.c                                        :+:      :+:    :+:   */
+/*   ft_strdupdel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 08:48:17 by vesingh           #+#    #+#             */
-/*   Updated: 2019/05/30 09:36:25 by vesingh          ###   ########.fr       */
+/*   Created: 2019/06/24 12:02:44 by vesingh           #+#    #+#             */
+/*   Updated: 2019/06/24 14:27:38 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*vs_strtok(char *str, const char *delim)
+char	*ft_strdupdel(char **str)
 {
-    static char	*p;
+	char	*tmp;
 
-	p = 0;
-    if (str)
-        p = str;
-    else if (!p)
-        return (0);
-    str = p + vs_strspn(p, delim);
-    p = str + vs_strcspn(str, delim);
-    if (p == str)
-        return (p = 0);
-    p = *p ? *p = 0, p + 1 : 0;
-    return (str);
+	tmp = ft_strdup(*str);
+	ft_strdel(str);
+	return (tmp);
 }

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcspn.c                                       :+:      :+:    :+:   */
+/*   ft_check_newline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 08:42:20 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/03 15:02:21 by vesingh          ###   ########.fr       */
+/*   Created: 2019/06/24 14:49:07 by vesingh           #+#    #+#             */
+/*   Updated: 2019/06/24 15:01:13 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	vs_strcspn(const char *s, const char *charset)
+int	ft_check_newline(char *str)
 {
-	size_t	ret;
+	int i;
 
-	ret = 0;
-	while (*s)
+	i = 0;
+	while (str[i] != '\0')
 	{
-		if (ft_strchr(charset, *s))
-			return (ret);
-		else
-		{
-			s++;
-			ret++;
-		}
+		if (str[i] == '\n')
+			return (i);
+		i++;
 	}
-	return (ret);
+	return (-1);
 }

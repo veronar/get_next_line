@@ -6,7 +6,7 @@
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:59:28 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/03 15:11:41 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/06/24 15:00:32 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,7 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+char				*ft_strdupdel(char **str);
+int					ft_check_newline(char *str);
 
 #endif
