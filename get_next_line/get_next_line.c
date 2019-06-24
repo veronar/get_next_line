@@ -6,7 +6,7 @@
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 09:06:55 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/19 16:30:01 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/06/24 10:01:25 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,20 @@ static int	ft_check_newline(char *str)
 	return (-1);
 }
 
-void		ft_no_newline(char **store, char **line, char *buff)
+void		ft_no_newline(char **store, char *buff)
 {
 	char	*temp;
 
-	(void)*line;//for now
 	if (*store == NULL)
 	{
 		*store = ft_strdup(buff);
-		//*line = ft_strdup(*store);
-		//free(*store);
 	}
 	else
 	{
 		temp = ft_strdup(*store);
-		free(*store); //might cry
+		free(*store);
 		*store = ft_strjoin(temp, buff);
 		free(temp);
-		//*line = ft_strdup(*store);
-		//free(*store);
 	}
 }
 
@@ -91,14 +86,14 @@ int			get_next_line(const int fd, char **line)
 	int			index;
 
 	buff[BUFF_SIZE] = '\0';
-	if (fd < 0 || line == NULL)
+	if (fd < 0 || line == NULL || read(fd, buff, 0) < 0)
 		return (-1);
 	if (store != NULL && (index = ft_check_newline(store)) != -1)
 		return (ft_noread(&store, line, index));
 	while ((read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		if (ft_check_newline(buff) == -1)
-			ft_no_newline(&store, line, buff);
+			ft_no_newline(&store, buff);
 		else if ((index = ft_check_newline(buff)) != -1)
 			return (ft_yes_newline(&store, line, buff, index));
 	}
