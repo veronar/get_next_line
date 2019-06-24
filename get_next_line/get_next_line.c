@@ -6,13 +6,13 @@
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 09:06:55 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/24 15:18:14 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/06/24 16:33:35 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_no_newline(char **store, char *buff)
+void		ft_no_newline(char **store, char *buff)
 {
 	char	*temp;
 
@@ -27,7 +27,6 @@ static int	ft_no_newline(char **store, char *buff)
 		*store = ft_strjoin(temp, buff);
 		free(temp);
 	}
-	return (0);
 }
 
 static int	ft_yes_newline(char **store, char **line, char *buff, int index)

@@ -6,13 +6,13 @@
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 09:11:24 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/24 10:26:43 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/06/24 16:33:32 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 100
+# define BUFF_SIZE 13
 # include "./libft/libft.h"
 
 int					get_next_line(const int fd, char **line);
