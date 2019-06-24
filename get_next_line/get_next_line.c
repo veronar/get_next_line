@@ -6,7 +6,7 @@
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 09:06:55 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/19 08:52:14 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/06/19 16:30:01 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,36 @@ void		ft_no_newline(char **store, char **line, char *buff)
 {
 	char	*temp;
 
+	(void)*line;//for now
 	if (*store == NULL)
 	{
 		*store = ft_strdup(buff);
-		*line = ft_strdup(*store);
-		free(*store);
+		//*line = ft_strdup(*store);
+		//free(*store);
 	}
 	else
 	{
 		temp = ft_strdup(*store);
+		free(*store); //might cry
 		*store = ft_strjoin(temp, buff);
 		free(temp);
-		*line = ft_strdup(*store);
-		free(*store);
+		//*line = ft_strdup(*store);
+		//free(*store);
 	}
 }
 
 static int	ft_yes_newline(char **store, char **line, char *buff, int index)
 {
 	char	*temp;
+	char	*temp2;
 
 	if (*store != NULL)
 	{
 		temp = ft_strdup(*store);
-		*store = ft_strsub(buff, 0, index);
-		*line = ft_strjoin(temp, *store);
+		temp2 = ft_strsub(buff, 0, index);
+		*line = ft_strjoin(temp, temp2);
 		free(temp);
+		free(temp2);
 		free(*store);
 	}
 	else
@@ -73,7 +77,7 @@ static int	ft_noread(char **store, char **line, int index)
 	char	*temp;
 
 	temp = ft_strdup(*store);
-	*line = ft_strdup(*store);
+	*line = ft_strsub(*store, 0, index);
 	free(*store);
 	*store = ft_strsub(temp, (index + 1), (ft_strlen(temp) - (index)));
 	free(temp);
