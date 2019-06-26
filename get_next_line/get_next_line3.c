@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 09:06:55 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/26 15:31:44 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/06/26 13:35:58 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 void		ft_no_newline(char **store, char *buff)
 {
-	char	*temp = NULL;
+	char	*temp;
 
 	if (*store == NULL)
 	{
@@ -24,61 +23,55 @@ void		ft_no_newline(char **store, char *buff)
 	else
 	{
 		temp = ft_strdup(*store);
-		ft_strdel(store);
-//		printf("no newline 0.0: store: = %p\n", *store);
+		free(*store);
 		*store = ft_strjoin(temp, buff);
-		ft_strdel(&temp);
+		free(temp);
 	}
-//	printf("no newline: temp = %p\n", temp);
 }
 
 static int	ft_yes_newline(char **store, char **line, char *buff, int index)
 {
-	char	*temp = NULL;
-	char	*temp2 = NULL;
+	char	*temp;
+	char	*temp2;
 
 	if (*store != NULL)
 	{
 		temp = ft_strdup(*store);
 		temp2 = ft_strsub(buff, 0, index);
 		*line = ft_strjoin(temp, temp2);
-		ft_strdel(&temp);
-		ft_strdel(&temp2);
-		ft_strdel(store);
+		free(temp);
+		free(temp2);
+		free(*store);
 	}
 	else
 	{
 		*store = ft_strsub(buff, 0, index);
 		*line = ft_strdup(*store);
-		ft_strdel(store);
+		free(*store);
 	}
-//	printf("yes newline 0.0: store: = %p\n", *store);
 	*store = ft_strsub(buff, (index + 1), (ft_strlen(buff) - (index)));
-//	printf("yes newline: temp = %p, temp2 = %p\n", temp, temp2);
 	return (1);
 }
 
 static int	ft_noread(char **store, char **line, int index)
 {
-	char	*temp = NULL;
+	char	*temp;
 
 	temp = ft_strdup(*store);
 	*line = ft_strsub(*store, 0, index);
-	ft_strdel(store);
-//	printf("no read 0.0: store: = %p\n", store);
+	free(*store);
 	*store = ft_strsub(temp, (index + 1), (ft_strlen(temp) - (index)));
-	ft_strdel(&temp);
-//	printf("no read temp = %p\n", temp);
+	free(temp);
 	return (1);
 }
 
-static int	ft_save_lines(char **line, char **store)
+/*static int	ft_save_lines(char **line, char **store)
 {
 	*line = ft_strdupdel(store);
-
-//	printf("save lines: store: = %p\n", *store);
+	//ft_strdel(store);
+	//free(store);
 	return (1);
-}
+}*/
 
 int			get_next_line(const int fd, char **line)
 {
@@ -98,14 +91,21 @@ int			get_next_line(const int fd, char **line)
 			ft_no_newline(&store, buff);
 			if (index < BUFF_SIZE)
 			{
-				index = ft_save_lines(line, &store);
-				return (index);
+				//ft_save_lines(line, &store);
+				*line = ft_strdup(store);
+				free(store);
+				return (1);
 			}
 		}
 		else if ((index = ft_check_newline(buff)) != -1)
 			return (ft_yes_newline(&store, line, buff, index));
 	}
 	if (store != NULL && ft_check_newline(store) == -1)
-		return (ft_save_lines(line, &store));
+	{
+		//ft_save_lines(line, &store);
+		*line = ft_strdup(store);
+		free(store);
+		return (1);
+	}
 	return (0);
 }
