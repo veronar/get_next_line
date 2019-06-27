@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_retry.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/27 07:32:43 by vesingh           #+#    #+#             */
+/*   Updated: 2019/06/27 08:36:48 by vesingh          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 #include <stdio.h>
 
@@ -17,12 +29,11 @@ int		ft_storetoline(char **store, char **line)
 		printf("line check 4, store = %s\n", *store);
 
 		if (*store[0] == '\0' && *store != NULL)
-	{
+		{
 			printf("line check 5, store = %s\n", *store);
 			free(store);
 			printf("line check 6, store = %s\n", *store);
-
-	}
+		}
 	}
 	else if (ft_strchr(*store, '\0') != NULL)
 	{
@@ -45,21 +56,29 @@ int		get_next_line(const int fd, char **line)
 	int			n;
 
 	n = 0;
-	if (fd < 0 || *line == NULL || read(fd, buff, 0) < 0 || BUFF_SIZE < 1)
+	printf ("check n = %i\n", n);
+	if (fd < 0 || line == NULL)
 		return (-1);
-	if (store != NULL)
-		return (ft_storetoline(&store, line)); 
-	while((n = read(fd, buff, BUFF_SIZE)) > 0)
+//	if (store != NULL)
+//	{
+//		ft_storetoline(&store, line);
+//		printf("check store = %s\n", store);
+//		return (1);
+//	}
+	printf("check after error check");
+	while ((n = read(fd, buff, BUFF_SIZE)) > 0)
 	{
+	
+		printf ("check n = %i\n", n);
 		buff[n] = '\0';
 		printf("check 0, buff = %s\n", buff);
 		if (store == NULL)
 			store = ft_strnew(1);
-//		printf("check 1, store = %s\n", store);
+		printf("check 1, store = %s\n", store);
 		temp = ft_strjoin(store, buff);
 		free(store);
 		store = ft_strdupdel(&temp);
-//		printf("check 2, temp = %s\n", temp);	
+		printf("check 2, temp = %s\n", temp);	
 //		ft_strdel(&temp);	
 		printf("check 3, store = %s\n", store);
 		if (ft_strchr(buff, '\n'))
