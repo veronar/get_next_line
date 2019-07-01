@@ -5,5 +5,4 @@ libft.a
 get_next_line.a
 *.o
 a.out
-main.c
 ._*
