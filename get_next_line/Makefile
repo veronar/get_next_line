@@ -6,13 +6,13 @@
 #    By: vesingh <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/23 13:33:16 by vesingh           #+#    #+#              #
-#    Updated: 2019/06/27 08:28:51 by vesingh          ###   ########.fr        #
+#    Updated: 2019/06/30 13:09:47 by vesingh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = gnl
 
-SRC = get_next_line.c main.c
+SRC = main.c get_next_line.c
 
 INCL = get_next_line.h
 
