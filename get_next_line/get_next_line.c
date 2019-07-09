@@ -6,7 +6,7 @@
 /*   By: vesingh <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 08:28:55 by vesingh           #+#    #+#             */
-/*   Updated: 2019/06/30 12:43:30 by vesingh          ###   ########.fr       */
+/*   Updated: 2019/07/09 07:39:25 by vesingh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ static int	ft_storetoline(char **store, char **line)
 
 static int	ft_reader(char **store, const int fd)
 {
-	char	*buff;
+	char	buff[BUFF_SIZE + 1];
 	int		n;
 
-	if (!(buff = ft_memalloc(sizeof(char) * BUFF_SIZE + 1)))
-		return (-1);
 	while ((n = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[n] = '\0';
@@ -49,16 +47,15 @@ static int	ft_reader(char **store, const int fd)
 		if (ft_strchr(*store, '\n'))
 			break ;
 	}
-	ft_strdel(&buff);
 	return (n);
 }
 
 int			get_next_line(const int fd, char **line)
 {
-	static char	*store[255];
+	static char	*store[1024];
 	int			n;
 
-	if (fd < 0 || line == NULL || BUFF_SIZE < 0)
+	if (fd < 0 || line == NULL || BUFF_SIZE < 0 || read(fd, NULL, 0) == -1)
 		return (-1);
 	if (!store[fd])
 		store[fd] = ft_strnew(0);
