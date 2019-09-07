@@ -6,3 +6,4 @@ get_next_line.a
 *.o
 a.out
 .vscode
+._*
