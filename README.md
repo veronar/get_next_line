@@ -17,13 +17,14 @@ cd ./get_next_line/get_next_line/
 
 ### Compilation
 
-In order to use get_next_line in folder `test_main` run the `Makefile` with the following command:
+In order to use get_next_line in folder `./test_main` run the `Makefile` with the following command:
 
 ```
 make
 ```
 
-This will create an executable called `gnl` which will read from the `test.txt`
+This will create an executable called `gnl` which will read from the `test.txt`.  
+The main can be edited to open any other files & read from it accordingly.
 
 If edits are made to get_next_line, it will need to be recompiled  
 To recompile run the following command:
